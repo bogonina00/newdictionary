@@ -1,0 +1,40 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<newdictionary>
+
+    <user id="1">
+        <login>violetta_2285</login>
+        <password>qwerty123</password>
+        <surname>Bogonina</surname>
+        <firstName>Violetta</firstName>
+    </user>
+    <user id="2">
+        <login>vladislav_8896</login>
+        <password>qwerty456</password>
+        <surname>Ivanov</surname>
+        <firstName>Vladislav</firstName>
+    </user>
+    <user id="3">
+        <login>spiderman</login>
+        <password>spider25</password>
+        <surname>Petrov</surname>
+        <firstName>Vasiliy</firstName>
+    </user>
+
+    <word id="1">
+        <transcriptions>kat</transcriptions>
+        <translation>Кошка</translation>
+    </word>
+    <word id="2">
+        <transcriptions>'get</transcriptions>
+        <translation>Получать</translation>
+    </word>
+
+    <dictionary id="1">
+        <user>Bogonina Violetta</user>
+        <languageType>English</languageType>
+        <word>kat</word>
+        <word>get</word>
+    </dictionary>
+
+
+</newdictionary>
