@@ -10,6 +10,4 @@ public class DictionaryCreationFactory {
         }
         return instance;//вернуть созданный ранее
     }
-
-
 }
