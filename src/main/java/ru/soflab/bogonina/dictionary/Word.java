@@ -4,10 +4,10 @@ package ru.soflab.bogonina.dictionary;
  * Слово
  */
 public class Word {
+    private Long id;
     private String transcription;
     private String translation;
-    /*private String native*/
-    private Long id;
+    private String natural;/*вместо native*/
 
     /**
      * Получить id слова
@@ -54,5 +54,21 @@ public class Word {
      */
     public void setTranscription(String transcription) {
         this.transcription = transcription;
+    }
+
+    /**
+     * Получить слово на родном языке
+     * @return  natural
+     */
+    public String getNatural() {
+        return natural;
+    }
+
+    /**
+     * Установить слово на родном языке
+     * @param natural слово на родном языке
+     */
+    public void setNatural(String natural) {
+        this.natural = natural;
     }
 }

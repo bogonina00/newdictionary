@@ -1,5 +1,7 @@
 package ru.soflab.bogonina.dictionary;
 
+import java.util.List;
+
 public class DictionaryCreationFactory {
     private static DictionaryCreationFactory instance;//статическое поле с одиночным объектом
     private DictionaryCreationFactory(){}//конструктор по умолчанию приватный
@@ -9,5 +11,17 @@ public class DictionaryCreationFactory {
             instance = new DictionaryCreationFactory();//создать новый объект
         }
         return instance;//вернуть созданный ранее
+
+        /*public List<Word> getDictionary(){
+            for (Word agg : words){
+                System.out.println(agg);
+            }
+            return null;
+        }*/
+    }
+
+    public Dictionary getDictionary() {
+
+        return null;
     }
 }

@@ -1,96 +1,108 @@
 package ru.soflab.bogonina.reader;
 
-import org.w3c.dom.Attr;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import ru.soflab.bogonina.dictionary.Dictionary;
+import ru.soflab.bogonina.dictionary.LanguageType;
+import ru.soflab.bogonina.dictionary.Word;
+import ru.soflab.bogonina.user.User;
 
-import javax.management.Attribute;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Handler extends DefaultHandler {
-    private Map<Integer, String> data = new HashMap<Integer, String>();
+
     private int id;
     private String element;
-    public void startDocument() throws SAXException {//начинает работать когда начинаем парсить документ
-        System.out.println("Start parsing...");
+    List<Word> words = new ArrayList();
+    List<String> time = new ArrayList();
+    private String str;
+    private String value;
+    Dictionary dictionary = new Dictionary();
+
+    /*public Dictionary getDictionary(){
+        return dictionary;
+    }*/
+
+    @Override
+    public void startDocument() throws SAXException {
+        System.out.println("start parsing...");
     }
 
-    public void endDocument() throws SAXException{
-        System.out.println("End parsing");
+    @Override
+    public void endDocument() throws SAXException {
+        System.out.println("end parsing.");
     }
 
-    public void startElement(String namespace, String localName, String qName, Attributes attr){
-        element = qName;
-        if (element.equals("user")){
-            id = Integer.parseInt(attr.getValue(0));
-            //if (element.equals("login"){ element = qName;}
+    @Override
+    public void startElement (String namespace, String localName, String qName, Attributes attr){
+        element = qName;//запоминаем тег
+        //System.out.println("Отработала строчка 40");
+        if ( (element.equals("user")) | (element.equals("dictionary")) | (element.equals("word"))){
+            id = (Integer.parseInt(attr.getValue(0)));
         }
-
-        else if (element.equals("dictionary")){
-            id = Integer.parseInt(attr.getValue(0));
-        }
-
-        else if (element.equals("word")){
-            id = Integer.parseInt(attr.getValue(0));
-        }
-
     }
 
-    public void endElement(String namespace, String localName, String qName) throws SAXException{
+    @Override
+    public void endElement (String namespace, String localName, String qName) throws SAXException {
         element = "";
-        id = -1;
+        dictionary.setId((long) id);
+        if (element.equals("login")) {
+            dictionary.setUser(User.setLogin(value));
+        }
+        if (element.equals("password")) {
+            dictionary.setUser(User.setPassword(value));
+        }
+        if (element.equals("surname")) {
+            dictionary.setUser(User.setSurname(value));
+        }
+        if (element.equals("firstName")) {
+            dictionary.setUser(new User());
+        }
+        if (element.equals("langyageType")) {
+            if (value == "ENGLISH") {
+                dictionary.setLanguageType(LanguageType.ENGLISH);
+            }
+            if (value == "DEUTSH") {
+                dictionary.setLanguageType(LanguageType.DEUTSH);
+            } else {
+                System.out.println("Language type error.");
+            }
+        }
+        if (element.equals("word")) {
+            int i = id;
+        }
+        if (element.equals("natural")) {
+            //dictionary.setWords(new Word());
+            time.add(value);
+        }
+        if (element.equals("transcription")) {
+            //dictionary.setWords(new Word());
+            time.add(value);
+        }
+
+        if (element.equals("translation")) {
+            //dictionary.setWords(new Word());
+            time.add(value);
+        }
     }
 
-    public void characters(char []ch, int start, int end){
-        //для user
+    @Override
+    public void characters (char[]ch, int start, int end) throws SAXException{//взять значение между тегами
+        //System.out.println(element);
+        System.out.println("102");
+        value = new String(ch, start, end);
+        System.out.println(value);
         if (element.equals("login")){
-            String loginStr = new String(ch, start, end);
-            data.put(id, loginStr);
+            str = new String(ch, start, end);
         }
-        else if (element.equals("password")){
-            String passwordStr = new String(ch, start, end);
-            data.put(id, passwordStr);
-        }
-        else if (element.equals("surname")){
-            String surnameStr = new String(ch, start, end);
-            data.put(id, surnameStr);
-        }
-        else if (element.equals("firstName")){
-            String firstNameStr = new String(ch, start, end);
-            data.put(id, firstNameStr);
-        }
-        //Для dictionary
-        if (element.equals("user")){
-            String userStr = new String(ch, start, end);
-            data.put(id, userStr);
-        }
-
-        else if (element.equals("languageType")){
-            String languageTypeStr = new String (ch, start, end);
-            data.put(id, languageTypeStr);
-        }
-
-        else if (element.equals("word")){
-            String wordStr = new String (ch, start, end);
-            data.put(id, wordStr);
-        }
-        //Для word
-        if (element.equals("transcriptions")){
-            String transcriptionsStr = new String(ch, start, end);
-            data.put(id, transcriptionsStr);
-        }
-        if (element.equals("translation")){
-            String translationStr = new String(ch, start, end);
-            data.put(id, translationStr);
-        }
-        //считает смиволы от start до end,преобразует все в string
-        // и будет объект str
     }
 
-    public Map<Integer, String> getData(){
-        return data;
-    }
-
+    /*public List<Word> getDictionary(){
+        for (Word agg : words){
+            System.out.println(agg);
+        }
+        return null;
+    }*/
 }

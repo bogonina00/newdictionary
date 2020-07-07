@@ -35,7 +35,7 @@ public class User {
     }
 
     /**
-     * Получить логин пользователя
+     * Установить логин пользователя
      * @param login логин пользователя
      */
     public void setLogin(String login) {
