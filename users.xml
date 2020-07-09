@@ -1,21 +1,25 @@
 <?xml version = "1.0" encoding = "UTF-8"?>
 <newdictionary>
     <dictionaries>
-        <dictionary id="1">
-            <user id="1">
+        <dictionary>
+            <id>1</id>
+            <user>
+                <id>1</id>
                 <login>violetta2285</login>
                 <password>17102010</password>
                 <surname>Violetta</surname>
                 <firstName>Bogonina</firstName>
             </user>
-            <langyageType>English</langyageType>
+            <langyageType>ENGLISH</langyageType>
             <words>
-                <word id="1">
+                <word>
+                    <id>1</id>
                     <natural>cat</natural>
                     <transcription>kæt</transcription>
                     <translation>кот</translation>
                 </word>
-                <word id="2">
+                <word>
+                    <id>2</id>
                     <natural>dog</natural>
                     <transcription>dɒɡ</transcription>
                     <translation>собака</translation>

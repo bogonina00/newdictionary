@@ -13,13 +13,14 @@ import java.util.List;
 
 public class Handler extends DefaultHandler {
 
-    private int id;
+    private Long id;
     private String element;
     List<Word> words = new ArrayList();
-    List<String> time = new ArrayList();
-    private String str;
     private String value;
-    Dictionary dictionary = new Dictionary();
+    private Long lId;
+    //Dictionary dictionary = new Dictionary();
+
+    Dictionary dictionary;
 
     /*public Dictionary getDictionary(){
         return dictionary;
@@ -39,70 +40,138 @@ public class Handler extends DefaultHandler {
     public void startElement (String namespace, String localName, String qName, Attributes attr){
         element = qName;//запоминаем тег
         //System.out.println("Отработала строчка 40");
-        if ( (element.equals("user")) | (element.equals("dictionary")) | (element.equals("word"))){
+        /*if ( (element.equals("user")) | (element.equals("dictionary")) | (element.equals("word"))){
             id = (Integer.parseInt(attr.getValue(0)));
+        }*/
+        if (qName.equals("dictionary")){
+            dictionary = new Dictionary();
         }
+        if (qName.equals("user")){
+            dictionary.setUser(new User());
+        }
+        /*if (qName.equals("langyageType")){
+            dictionary.setLanguageType(new LanguageType());
+        }*/
+        if (qName.equals("words")){
+            dictionary.setWords(new ArrayList());
+        }
+
     }
 
     @Override
     public void endElement (String namespace, String localName, String qName) throws SAXException {
-        element = "";
-        dictionary.setId((long) id);
-        if (element.equals("login")) {
-            dictionary.setUser(User.setLogin(value));
+        //System.out.println("Работает handler");
+        /*if (qName.equals("id")){
+            int nId = Integer.parseInt(value);
+            //Long newId = (Long) id;
+            //Long nValue = newValue;
+            dictionary.getUser().setId((long)nId);
+        }*/
+        if (qName.equals("user")){
+            dictionary.setId(lId);
         }
-        if (element.equals("password")) {
-            dictionary.setUser(User.setPassword(value));
+
+        if (qName.equals("login")) {
+            dictionary.getUser().setId(lId);
         }
-        if (element.equals("surname")) {
-            dictionary.setUser(User.setSurname(value));
+
+        if (qName.equals("login")) {
+            dictionary.getUser().setLogin(value);
         }
-        if (element.equals("firstName")) {
-            dictionary.setUser(new User());
+
+        if (qName.equals("password")) {
+            dictionary.getUser().setPassword(value);
         }
-        if (element.equals("langyageType")) {
-            if (value == "ENGLISH") {
+
+        if (qName.equals("surname")) {
+            dictionary.getUser().setSurname(value);
+        }
+
+        if (qName.equals("firstName")) {
+            dictionary.getUser().setFirstName(value);
+        }
+
+        if (qName.equals("langyageType")) {
+            if (value.equals("ENGLISH")) {
                 dictionary.setLanguageType(LanguageType.ENGLISH);
             }
-            if (value == "DEUTSH") {
+        }
+
+        if (qName.equals("langyageType")) {
+            if (value.equals("DEUTSH")) {
                 dictionary.setLanguageType(LanguageType.DEUTSH);
-            } else {
+            }
+        }
+
+        if (qName.equals("langyageType")) {
+            if ( (!value.equals("ENGLISH")) & (!value.equals("DEUTSH"))){
                 System.out.println("Language type error.");
             }
         }
-        if (element.equals("word")) {
-            int i = id;
+
+        if (element.equals("id")) {
+            if (dictionary.getWords().size()>0) {
+                int size = dictionary.getWords().size() - 1;
+                dictionary.getWords().get(size).setId(lId);
+            }
+            if (dictionary.getWords().size()==0) {
+                int size = dictionary.getWords().size() - 1;
+                dictionary.getWords().get(0).setId(value);
+            }
         }
+
         if (element.equals("natural")) {
-            //dictionary.setWords(new Word());
-            time.add(value);
+            if (dictionary.getWords().size()>0) {
+                int size = dictionary.getWords().size() - 1;
+                dictionary.getWords().get(size).setNatural(value);
+            }
+
+            if (dictionary.getWords().size()==0) {
+                int size = dictionary.getWords().size() - 1;
+                dictionary.getWords().get(0).setNatural(value);
+            }
         }
+
         if (element.equals("transcription")) {
-            //dictionary.setWords(new Word());
-            time.add(value);
+            if (dictionary.getWords().size()>0) {
+                int size = dictionary.getWords().size() - 1;
+                dictionary.getWords().get(size).setTranscription(value);
+            }
+
+            if (dictionary.getWords().size()==0) {
+                int size = dictionary.getWords().size() - 1;
+                dictionary.getWords().get(size).setTranscription(value);
+            }
         }
 
         if (element.equals("translation")) {
-            //dictionary.setWords(new Word());
-            time.add(value);
+            if (dictionary.getWords().size()>0) {
+                int size = dictionary.getWords().size() - 1;
+                dictionary.getWords().get(size).setTranslation(value);
+            }
+
+            if (dictionary.getWords().size()==0) {
+                int size = dictionary.getWords().size() - 1;
+                dictionary.getWords().get(size).setTranslation(value);
+            }
         }
     }
 
     @Override
     public void characters (char[]ch, int start, int end) throws SAXException{//взять значение между тегами
-        //System.out.println(element);
-        System.out.println("102");
+        //System.out.println("Start read value");
         value = new String(ch, start, end);
         System.out.println(value);
-        if (element.equals("login")){
-            str = new String(ch, start, end);
+        if (element.equals("id")){
+            try{
+                lId = Long.parseLong(value);
+            } catch (NumberFormatException e){
+                System.err.println("Invalid string format!"); }
         }
+        //System.out.println("End read value");
     }
 
-    /*public List<Word> getDictionary(){
-        for (Word agg : words){
-            System.out.println(agg);
-        }
+    public Dictionary getDictionary(){
         return null;
-    }*/
+    }
 }
