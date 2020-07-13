@@ -5,5 +5,5 @@ package ru.soflab.bogonina.dictionary;
  */
 public enum LanguageType {
     ENGLISH,
-    DEUTSH;
+    DEUTSCH;
 }

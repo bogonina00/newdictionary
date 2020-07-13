@@ -15,12 +15,6 @@ public class DictionaryCreationFactory {
         }
         return instance;//вернуть созданный ранее
 
-        /*public List<Word> getDictionary(){
-            for (Word agg : words){
-                System.out.println(agg);
-            }
-            return null;
-        }*/
 
     }
 

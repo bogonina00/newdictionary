@@ -15,9 +15,7 @@ public class Handler extends DefaultHandler {
 
     private Long id;
     private String element;
-    List<Word> words = new ArrayList();
     private String value;
-    private Long lId;
     //Dictionary dictionary = new Dictionary();
 
     Dictionary dictionary;
@@ -39,21 +37,18 @@ public class Handler extends DefaultHandler {
     @Override
     public void startElement (String namespace, String localName, String qName, Attributes attr){
         element = qName;//запоминаем тег
-        //System.out.println("Отработала строчка 40");
-        /*if ( (element.equals("user")) | (element.equals("dictionary")) | (element.equals("word"))){
-            id = (Integer.parseInt(attr.getValue(0)));
-        }*/
+
         if (qName.equals("dictionary")){
             dictionary = new Dictionary();
         }
         if (qName.equals("user")){
             dictionary.setUser(new User());
         }
-        /*if (qName.equals("langyageType")){
-            dictionary.setLanguageType(new LanguageType());
-        }*/
         if (qName.equals("words")){
             dictionary.setWords(new ArrayList());
+        }
+        if (element.equals("word")){
+            dictionary.getWords().add(new Word());
         }
 
     }
@@ -61,18 +56,12 @@ public class Handler extends DefaultHandler {
     @Override
     public void endElement (String namespace, String localName, String qName) throws SAXException {
         //System.out.println("Работает handler");
-        /*if (qName.equals("id")){
-            int nId = Integer.parseInt(value);
-            //Long newId = (Long) id;
-            //Long nValue = newValue;
-            dictionary.getUser().setId((long)nId);
-        }*/
         if (qName.equals("user")){
-            dictionary.setId(lId);
+            dictionary.setId(id);
         }
 
         if (qName.equals("login")) {
-            dictionary.getUser().setId(lId);
+            dictionary.getUser().setId(id);
         }
 
         if (qName.equals("login")) {
@@ -91,70 +80,59 @@ public class Handler extends DefaultHandler {
             dictionary.getUser().setFirstName(value);
         }
 
-        if (qName.equals("langyageType")) {
+        if (qName.equals("languageType")) {
             if (value.equals("ENGLISH")) {
                 dictionary.setLanguageType(LanguageType.ENGLISH);
             }
         }
 
-        if (qName.equals("langyageType")) {
-            if (value.equals("DEUTSH")) {
-                dictionary.setLanguageType(LanguageType.DEUTSH);
+        if (qName.equals("languageType")) {
+            if (value.equals("DEUTSCH")) {
+                dictionary.setLanguageType(LanguageType.DEUTSCH);
             }
         }
 
-        if (qName.equals("langyageType")) {
-            if ( (!value.equals("ENGLISH")) & (!value.equals("DEUTSH"))){
+        if (qName.equals("languageType") & ((!value.equals("ENGLISH")) & (!value.equals("DEUTSCH")))) {
+            //if ( (!value.equals("ENGLISH")) & (!value.equals("DEUTSCH"))){
                 System.out.println("Language type error.");
-            }
+            //}
         }
 
-        if (element.equals("id")) {
-            if (dictionary.getWords().size()>0) {
-                int size = dictionary.getWords().size() - 1;
-                dictionary.getWords().get(size).setId(lId);
-            }
-            if (dictionary.getWords().size()==0) {
-                int size = dictionary.getWords().size() - 1;
-                dictionary.getWords().get(0).setId(value);
-            }
-        }
+        /*if (qName.equals("words")){
+            dictionary.setWords(new ArrayList());
+        }*/
+
+        /*if (element.equals("id")) {
+            try{
+                id = Long.parseLong(value);
+            } catch (NumberFormatException e){
+                System.err.println("Invalid string format!"); }
+            //size = dictionary.getWords().size();
+            dictionary.getWords().get(dictionary.getWords().size()).setId(id);////////////////
+        }*/
 
         if (element.equals("natural")) {
-            if (dictionary.getWords().size()>0) {
-                int size = dictionary.getWords().size() - 1;
-                dictionary.getWords().get(size).setNatural(value);
-            }
-
-            if (dictionary.getWords().size()==0) {
-                int size = dictionary.getWords().size() - 1;
-                dictionary.getWords().get(0).setNatural(value);
-            }
+            //size = dictionary.getWords().size();
+            dictionary.getWords().get(dictionary.getWords().size()).setId(id);
+            dictionary.getWords().get(dictionary.getWords().size()).setNatural(value);/////////////////
         }
 
-        if (element.equals("transcription")) {
-            if (dictionary.getWords().size()>0) {
-                int size = dictionary.getWords().size() - 1;
-                dictionary.getWords().get(size).setTranscription(value);
-            }
+        //if (element.equals("natural")) {
+            //size = dictionary.getWords().size();
+            //dictionary.getWords().get(dictionary.getWords().size()).setId(id);
+            //dictionary.getWords().get(dictionary.getWords().size()).setNatural(value);/////////////////
+        //}
 
-            if (dictionary.getWords().size()==0) {
-                int size = dictionary.getWords().size() - 1;
-                dictionary.getWords().get(size).setTranscription(value);
-            }
+        if (element.equals("transcription")) {
+            //size = dictionary.getWords().size();
+            dictionary.getWords().get(dictionary.getWords().size()).setTranscription(value);/////////////
         }
 
         if (element.equals("translation")) {
-            if (dictionary.getWords().size()>0) {
-                int size = dictionary.getWords().size() - 1;
-                dictionary.getWords().get(size).setTranslation(value);
-            }
-
-            if (dictionary.getWords().size()==0) {
-                int size = dictionary.getWords().size() - 1;
-                dictionary.getWords().get(size).setTranslation(value);
-            }
+            //size = dictionary.getWords().size();
+            dictionary.getWords().get(dictionary.getWords().size()).setTranslation(value);/////////////
         }
+
     }
 
     @Override
@@ -164,7 +142,7 @@ public class Handler extends DefaultHandler {
         System.out.println(value);
         if (element.equals("id")){
             try{
-                lId = Long.parseLong(value);
+                id = Long.parseLong(value);
             } catch (NumberFormatException e){
                 System.err.println("Invalid string format!"); }
         }
