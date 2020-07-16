@@ -113,8 +113,8 @@ public class Handler extends DefaultHandler {
 
         if (element.equals("natural")) {
             //size = dictionary.getWords().size();
-            dictionary.getWords().get(dictionary.getWords().size()).setId(id);
-            dictionary.getWords().get(dictionary.getWords().size()).setNatural(value);/////////////////
+            dictionary.getWords().get(dictionary.getWords().size()-1).setId(id);
+            dictionary.getWords().get(dictionary.getWords().size()-1).setNatural(value);/////////////////
         }
 
         //if (element.equals("natural")) {
@@ -125,12 +125,12 @@ public class Handler extends DefaultHandler {
 
         if (element.equals("transcription")) {
             //size = dictionary.getWords().size();
-            dictionary.getWords().get(dictionary.getWords().size()).setTranscription(value);/////////////
+            dictionary.getWords().get(dictionary.getWords().size()-1).setTranscription(value);/////////////
         }
 
         if (element.equals("translation")) {
             //size = dictionary.getWords().size();
-            dictionary.getWords().get(dictionary.getWords().size()).setTranslation(value);/////////////
+            dictionary.getWords().get(dictionary.getWords().size()-1).setTranslation(value);/////////////
         }
 
     }
