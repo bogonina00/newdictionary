@@ -14,14 +14,14 @@ public class DictionaryCreationFactory {
             instance = new DictionaryCreationFactory();//создать новый объект
         }
         return instance;//вернуть созданный ранее
-
-
     }
+
+    //prime.readerXML();
 
     public Dictionary getDictionary() throws Exception {
         prime.readerXML();
-
        // System.out.println("Работает getDictionary из фабрики");
+        //тут надо что то исправить
         return null;
     }
 }

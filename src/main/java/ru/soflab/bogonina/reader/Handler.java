@@ -16,13 +16,10 @@ public class Handler extends DefaultHandler {
     private Long id;
     private String element;
     private String value;
-    //Dictionary dictionary = new Dictionary();
+
 
     Dictionary dictionary;
 
-    /*public Dictionary getDictionary(){
-        return dictionary;
-    }*/
 
     @Override
     public void startDocument() throws SAXException {
@@ -56,6 +53,14 @@ public class Handler extends DefaultHandler {
     @Override
     public void endElement (String namespace, String localName, String qName) throws SAXException {
         //System.out.println("Работает handler");
+
+        if (element.equals("id")){
+            try{
+                id = Long.parseLong(value);
+            } catch (NumberFormatException e){
+                System.err.println("Invalid string format!"); }
+        }
+
         if (qName.equals("user")){
             dictionary.setId(id);
         }
@@ -93,38 +98,15 @@ public class Handler extends DefaultHandler {
         }
 
         if (qName.equals("languageType") & ((!value.equals("ENGLISH")) & (!value.equals("DEUTSCH")))) {
-            //if ( (!value.equals("ENGLISH")) & (!value.equals("DEUTSCH"))){
                 System.out.println("Language type error.");
-            //}
         }
 
-        /*if (qName.equals("words")){
-            dictionary.setWords(new ArrayList());
-        }*/
-
-        /*if (element.equals("id")) {
-            try{
-                id = Long.parseLong(value);
-            } catch (NumberFormatException e){
-                System.err.println("Invalid string format!"); }
-            //size = dictionary.getWords().size();
-            dictionary.getWords().get(dictionary.getWords().size()).setId(id);////////////////
-        }*/
-
         if (element.equals("natural")) {
-            //size = dictionary.getWords().size();
             dictionary.getWords().get(dictionary.getWords().size()-1).setId(id);
             dictionary.getWords().get(dictionary.getWords().size()-1).setNatural(value);/////////////////
         }
 
-        //if (element.equals("natural")) {
-            //size = dictionary.getWords().size();
-            //dictionary.getWords().get(dictionary.getWords().size()).setId(id);
-            //dictionary.getWords().get(dictionary.getWords().size()).setNatural(value);/////////////////
-        //}
-
         if (element.equals("transcription")) {
-            //size = dictionary.getWords().size();
             dictionary.getWords().get(dictionary.getWords().size()-1).setTranscription(value);/////////////
         }
 
@@ -140,16 +122,12 @@ public class Handler extends DefaultHandler {
         //System.out.println("Start read value");
         value = new String(ch, start, end);
         System.out.println(value);
-        if (element.equals("id")){
+        /*if (element.equals("id")){
             try{
                 id = Long.parseLong(value);
             } catch (NumberFormatException e){
                 System.err.println("Invalid string format!"); }
-        }
+        }*/
         //System.out.println("End read value");
-    }
-
-    public Dictionary getDictionary(){
-        return null;
     }
 }
