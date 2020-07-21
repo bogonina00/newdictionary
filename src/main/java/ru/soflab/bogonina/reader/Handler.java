@@ -17,9 +17,7 @@ public class Handler extends DefaultHandler {
     private String element;
     private String value;
 
-
     Dictionary dictionary;
-
 
     @Override
     public void startDocument() throws SAXException {
@@ -42,12 +40,11 @@ public class Handler extends DefaultHandler {
             dictionary.setUser(new User());
         }
         if (qName.equals("words")){
-            dictionary.setWords(new ArrayList());
+            dictionary.setWords(new ArrayList<Word>());
         }
         if (element.equals("word")){
             dictionary.getWords().add(new Word());
         }
-
     }
 
     @Override
@@ -103,31 +100,23 @@ public class Handler extends DefaultHandler {
 
         if (element.equals("natural")) {
             dictionary.getWords().get(dictionary.getWords().size()-1).setId(id);
-            dictionary.getWords().get(dictionary.getWords().size()-1).setNatural(value);/////////////////
+            dictionary.getWords().get(dictionary.getWords().size()-1).setNatural(value);
         }
 
         if (element.equals("transcription")) {
-            dictionary.getWords().get(dictionary.getWords().size()-1).setTranscription(value);/////////////
+            dictionary.getWords().get(dictionary.getWords().size()-1).setTranscription(value);
         }
 
         if (element.equals("translation")) {
-            //size = dictionary.getWords().size();
-            dictionary.getWords().get(dictionary.getWords().size()-1).setTranslation(value);/////////////
+            dictionary.getWords().get(dictionary.getWords().size()-1).setTranslation(value);
         }
 
     }
 
     @Override
     public void characters (char[]ch, int start, int end) throws SAXException{//взять значение между тегами
-        //System.out.println("Start read value");
         value = new String(ch, start, end);
         //System.out.println(value);
-        /*if (element.equals("id")){
-            try{
-                id = Long.parseLong(value);
-            } catch (NumberFormatException e){
-                System.err.println("Invalid string format!"); }
-        }*/
         //System.out.println("End read value");
     }
 }

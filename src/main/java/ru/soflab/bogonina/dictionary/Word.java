@@ -26,18 +26,19 @@ public class Word {
     }
 
     /**
-     * Полчить перевод слова
-     * @return перевод слова
+     * Получить слово на родном языке
+     * @return  natural
      */
-    public String getTranslation() {
-        return translation;
+    public String getNatural() {
+        return natural;
     }
 
     /**
-     * Установить перевод слова
-     * @param translation перевод слова*/
-    public void setTranslation(String translation) {
-        this.translation = translation;
+     * Установить слово на родном языке
+     * @param natural слово на родном языке
+     */
+    public void setNatural(String natural) {
+        this.natural = natural;
     }
 
     /**
@@ -57,18 +58,17 @@ public class Word {
     }
 
     /**
-     * Получить слово на родном языке
-     * @return  natural
+     * Полчить перевод слова
+     * @return перевод слова
      */
-    public String getNatural() {
-        return natural;
+    public String getTranslation() {
+        return translation;
     }
 
     /**
-     * Установить слово на родном языке
-     * @param natural слово на родном языке
-     */
-    public void setNatural(String natural) {
-        this.natural = natural;
+     * Установить перевод слова
+     * @param translation перевод слова*/
+    public void setTranslation(String translation) {
+        this.translation = translation;
     }
 }

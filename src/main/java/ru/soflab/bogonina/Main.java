@@ -10,7 +10,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Dictionary dictionary = DictionaryCreationFactory.getInstance().getDictionary();
         for (Word word : dictionary.getWords()) {
-            //System.out.println(dictionary.getUser().getLogin());
             if (word.getId() == 1){
                 System.out.println(dictionary.getUser().getLogin());
             }

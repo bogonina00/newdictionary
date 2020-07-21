@@ -16,26 +16,13 @@ import java.util.Map;
 
 public class ReaderXML {
     Handler handler = new Handler();
-    public void readerXML(/*String[] args*/) throws Exception {
-        //System.out.println("Работает ридер до файла");
+    public void readerXML() throws Exception {
         SAXParser saxparser = SAXParserFactory.newInstance().newSAXParser();
         saxparser.parse(new File("C:\\Users\\Violetta\\Desktop\\newdictionary\\newdictionary\\users.xml"), handler);
-        //System.out.println("Работает ридер после файла");
     }
 
     public Dictionary getDictionary(){
         return handler.dictionary;
     }
-
-        /*List<Word> words = handler.getWords();
-        for (Word agg : words){
-            System.out.println(agg);
-        }*/
-        //System.out.println(User);
-    //}
-    /*public String getUsers(){
-        System.out.println(User.);
-        return null;
-    }*/
 
 }
