@@ -24,7 +24,7 @@ public class ReaderXML {
     }
 
     public Dictionary getDictionary(){
-        return null;
+        return handler.dictionary;
     }
 
         /*List<Word> words = handler.getWords();

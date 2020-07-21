@@ -121,7 +121,7 @@ public class Handler extends DefaultHandler {
     public void characters (char[]ch, int start, int end) throws SAXException{//взять значение между тегами
         //System.out.println("Start read value");
         value = new String(ch, start, end);
-        System.out.println(value);
+        //System.out.println(value);
         /*if (element.equals("id")){
             try{
                 id = Long.parseLong(value);

@@ -7,10 +7,14 @@ import ru.soflab.bogonina.dictionary.Word;
 import java.util.List;
 
 public class Main {
-    public static void main(String [] args) throws Exception {
+    public static void main(String[] args) throws Exception {
         Dictionary dictionary = DictionaryCreationFactory.getInstance().getDictionary();
-        for(Word word: dictionary.getWords()) {
-            System.out.println(word.getId() + "." + word.getNatural() + "-" + word.getTranscription() + "-" + word.getTranslation());
+        for (Word word : dictionary.getWords()) {
+            //System.out.println(dictionary.getUser().getLogin());
+            if (word.getId() == 1){
+                System.out.println(dictionary.getUser().getLogin());
+            }
+            System.out.println(word.getId() + ". " + word.getNatural() + " - " + word.getTranscription() + " - " + word.getTranslation());
         }
     }
 }
