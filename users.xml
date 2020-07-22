@@ -15,14 +15,38 @@
                 <word>
                     <id>1</id>
                     <natural>cat</natural>
-                    <transcription>kæt</transcription>
+                    <transcription>[kæt]</transcription>
                     <translation>кошка</translation>
                 </word>
                 <word>
                     <id>2</id>
                     <natural>dog</natural>
-                    <transcription>dɒɡ</transcription>
+                    <transcription>[dɒɡ]</transcription>
                     <translation>собака</translation>
+                </word>
+                <word>
+                    <id>3</id>
+                    <natural>horse</natural>
+                    <transcription>[hɔːrs]</transcription>
+                    <translation>лошадь</translation>
+                </word>
+                <word>
+                    <id>4</id>
+                    <natural>hare</natural>
+                    <transcription>[her]</transcription>
+                    <translation>заяц</translation>
+                </word>
+                <word>
+                    <id>5</id>
+                    <natural>giraffe</natural>
+                    <transcription>[-ˈræf]</transcription>
+                    <translation>жираф</translation>
+                </word>
+                <word>
+                    <id>6</id>
+                    <natural>elephant</natural>
+                    <transcription>[ˈel.ɪ.fənt]</transcription>
+                    <translation>слон</translation>
                 </word>
             </words>
         </dictionary>
